@@ -1,0 +1,11 @@
+{
+  "name": "my_node03",
+  "version": "1.0.0",
+  "description": "in this module i am learning HTTP server",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
