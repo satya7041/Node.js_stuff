@@ -14,10 +14,10 @@ const url = require('url') //first it will go check in package.json inside depen
 const myServer = http.createServer((req, res) => { //it will create web server
     if (req.url === "/favicon.ico")
         return res.end(); //to avoid twice printing
-    const log = `${Date.now()}: ${req.url} New req received\n`  //req.url is used to find the path
+    const log = `${Date.now()}: ${req.method} ${req.url} New req received\n`  //req.url is used to find the path and check method type
 
     const myUrl = url.parse(req.url, true); //true mean parsing and creating object the query
-    console.log(myUrl);
+    // console.log(myUrl); 
 
 
     fs.appendFile("log.txt", `this is log data:${log}`, (error, data) => {
@@ -25,20 +25,35 @@ const myServer = http.createServer((req, res) => { //it will create web server
         //    switch (req.url) {
         switch (myUrl.pathname) {
 
-            case '/': res.end("You are on Homepage"); // In case '/' means homepage
+            case '/':
+
+                if (req.method === 'GET') res.end('Homepafe')
+                // res.end("You are on Homepage"); // In case '/' means homepage
                 break;
-            case '/about':  
-            const username = myUrl.query.myname; //myname from url
-             res.end(`Hey ${username}, I am Satyam! Learning node.js from piyush garg youtube`)
+
+            case '/about':
+                if (req.method === 'GET') res.end('Homepafe')
+                const username = myUrl.query.myname; //myname from url
+                res.end(`Hey ${username}, I am Satyam! Learning node.js from piyush garg youtube`)
                 break;
 
             case '/contact-us': res.end("To contact me: 327232341")
                 break;
-            case '/search': 
-            const search = myUrl.query.search_query;
-            // res.end(`Are you searching for ${search} ?`)
-            res.end(`Here are your result for`+search) //fetch searched data into database and append to user
+
+            case '/search':
+                const search = myUrl.query.search_query;
+                // res.end(`Are you searching for ${search} ?`)
+                res.end(`Here are your result for` + search) //fetch searched data into database and append to user
                 break;
+
+            case '/signup':
+                        if(req.method === "GET") res.end('This is a Signup Form')
+                            else if(re.method === "POST"){
+                        //DB query to store data
+                        res.end("Success!")
+                            }
+            break;
+
             default: res.end("404 Not Found!")
                 break;
         }
