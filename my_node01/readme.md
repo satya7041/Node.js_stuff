@@ -1,0 +1,1 @@
+in this my_node01 folder, i have learned, about using function in another file and used that function in another file like function file is math.js and used in hello.js. In addition i have also learned to create my own script, look into sript section of package.json file.
